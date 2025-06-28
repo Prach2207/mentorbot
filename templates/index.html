@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MentorBot</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <p>Welcome, {{ username }} | <a href="{{ url_for('logout') }}">Logout</a></p>
+    <form method="POST">
+      <input name="question" placeholder="Ask me anything..." required>
+      <button type="submit">Ask</button>
+    </form>
+
+    {% if answer %}
+      <div class="alert alert-info">
+        <h4>Answer:</h4>
+        {{ answer }}
+      </div>
+    {% endif %}
+
+    {% if recommendation %}
+      <div class="alert alert-success">
+        <h4>Recommended Resource:</h4>
+        {{ recommendation }}
+      </div>
+    {% endif %}
+
+    {% if subject_progress %}
+      <h4>Learning Progress</h4>
+      {% for subject, percent in subject_progress.items() %}
+        <div class="progress">
+          <div class="progress-bar" style="width: {{ percent }}%;">{{ subject }} - {{ percent }}%</div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</body>
+</html>
